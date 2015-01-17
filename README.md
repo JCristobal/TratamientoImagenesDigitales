@@ -14,7 +14,7 @@ Los temas que trata el repositorio son:
 * [Transformaciones a niveles de grises y procesamiento según histogramas](https://github.com/JCristobal/TratamientoImagenesDigitales/blob/master/transformaciones%20a%20niveles%20de%20grises%20y%20procesamiento%20seg%C3%BAn%20histogramas.m)
 * [Filtrado en el dominio de frecuencias](https://github.com/JCristobal/TratamientoImagenesDigitales/blob/master/filtrado%20en%20dominio%20de%20frecuencias.m)
 * [Reducción de ruido en el dominio espacial](https://github.com/JCristobal/TratamientoImagenesDigitales/blob/master/Reduccion%20de%20ruido%20en%20el%20dominio%20espacial.m)
-* [Detección de fronteras](https://github.com/JCristobal/TratamientoImagenesDigitales/blob/master/deteccion%20fronteras.m)
+* [Detección de fronteras](https://github.com/JCristobal/TratamientoImagenesDigitales/blob/master/deteccion_fronteras.m)
 
 
 ***
