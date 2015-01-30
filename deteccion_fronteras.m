@@ -1,12 +1,12 @@
 %
-%% DetecciÛn de bordes y tÈcnicas asociadas
+%% Detecci√≥n de bordes y t√©cnicas asociadas
 %
 
 %% Primero extraemos los bordes de la imagen usando el operador de Prewitt
 I = imread('lenna.tif');
 [I_prw1,t1] = edge(I,'prewitt');
 
-% AÒadimos ruido a la imagen y extrae sus bordes
+% A√±adimos ruido a la imagen y extrae sus bordes
 I_noise = imnoise(I,'gaussian');
 [I_prw2,t2] = edge(I_noise,'prewitt');
 
@@ -20,7 +20,7 @@ subplot(2,2,4), imshow(I_prw2), title('Prewitt sobre ruido');
 %% Pasemos ahora a analizar el operador de Sobel. 
 [I_sob1,t1] = edge(I,'sobel');
 
-% Pasamos a hacer erosiones. Su c·lculo es un proceso similar a la dilataciÛn. Usaremos los EEs que ya tenemos 
+% Pasamos a hacer erosiones. Su c√°lculo es un proceso similar a la dilataci√≥n. Usaremos los EEs que ya tenemos 
 [I_sob2,t2] = edge(I_noise,'sobel');
 
 
@@ -29,7 +29,7 @@ subplot(2,2,2), imshow(I_sob1), title('Sobel, umbral por defecto');
 subplot(2,2,3), imshow(I_noise), title('Imagen con ruido');
 subplot(2,2,4), imshow(I_sob2), title('Sobel con ruido');
 
-%% Operador Sobel en convoluciÛn horizontal y convoluciÛn vertial
+%% Operador Sobel en convoluci√≥n horizontal y convoluci√≥n vertial
 
 [I_sob4,t,I_sobv,I_sobh] = edge(I,'sobel');
 figure
@@ -38,7 +38,7 @@ subplot(2,2,2), imshow(I_sob4), title('Sobel completo');
 subplot(2,2,3), imshow(abs(I_sobv),[]), title('Sobel Vertical');
 subplot(2,2,4), imshow(abs(I_sobh),[]), title('Sobel Horizontal');
 
-%% Thinning ( reducciÛn de la anchura de los bordes detectados)
+%% Thinning ( reducci√≥n de la anchura de los bordes detectados)
 % Por defecto se aplica cundo utilizamos edege, aunque puede deshabilitarse.
 
 I_sob3 = edge(I,'sobel','nothinning');
@@ -57,7 +57,7 @@ subplot(2,2,2), imshow(I_rob1), title('Roberts, umbral por defecto');
 subplot(2,2,3), imshow(I_noise), title('Imagen con ruido');
 subplot(2,2,4), imshow(I_rob2), title('Roberts sobre ruidosa');
 
-%% Uso de LoG para detectar bordes. Est· tambiÈn incluida  en la funciÛn edge.
+%% Uso de LoG para detectar bordes. Est√° tambi√©n incluida  en la funci√≥n edge.
 
 I_log1 = edge(I,'log');
 
@@ -66,7 +66,7 @@ I_log1 = edge(I,'log');
 
 figure
 subplot(2,2,1), imshow(I), title('Original Imagen Original');
-subplot(2,2,2), imshow(I_log1), title('LoG, par·metros por defecto');
+subplot(2,2,2), imshow(I_log1), title('LoG, par√°metros por defecto');
 subplot(2,2,3), imshow(I_noise), title('Imagen con ruido');
 subplot(2,2,4), imshow(I_log2), title('LoG sobre ruido');
 
@@ -88,11 +88,11 @@ subplot(2,2,4), imshow(I_can2), title('Canny sobre ruido');
 
 [I_can3,t] = edge(I_noise,'canny', [], 2);
 figure
-subplot(1,2,1), imshow(I_can2), title('Canny, par·metros por defecto');
+subplot(1,2,1), imshow(I_can2), title('Canny, par√°metros por defecto');
 subplot(1,2,2), imshow(I_can3), title('Canny, sigma = 2');
 
 
-%%  Otra opciÛn del detector de fronteras de Canny es la modificaciÛn del
+%%  Otra opci√≥n del detector de fronteras de Canny es la modificaci√≥n del
 %  umbral:
 
 close all; clear all;
@@ -102,7 +102,7 @@ I = imread('mandrill.tif');
 [I_can1,thresh] = edge(I,'canny');
 
 
-% Y vemos el contenido de la variable thresh
+% Y vemos el contenido de la variable thresh, en mi caso [0.06250 0.15625]
 
 % Utilizamos un umbral mayor que thresh
 [I_can2,thresh] = edge(I, 'canny', 0.4);
@@ -113,16 +113,16 @@ I = imread('mandrill.tif');
 
 figure
 subplot(2,2,1), imshow(I), title('Imagen original');
-subplot(2,2,2), imshow(I_can1), title('Canny, par·metros por defecto');
+subplot(2,2,2), imshow(I_can1), title('Canny, par√°metros por defecto');
 subplot(2,2,3), imshow(I_can2), title('Canny, umbral = 0.4');
 subplot(2,2,4), imshow(I_can2), title('Canny, umbral = 0.08');
 
 
-%% Uso del detector de Kirsch (no est· incluido en IPT)
+%% Uso del detector de Kirsch (no est√° incluido en IPT)
 I = imread('mandrill.tif');
 I = im2double(I);
 
-% Creamos las m·scaras de Kirsch y las almacÈnamos
+% Creamos las m√°scaras de Kirsch y las almac√©namos
 
 k = zeros(3,3,8);
 k(:,:,1) = [-3 -3 5; -3 0 5; -3 -3 5];
@@ -134,36 +134,36 @@ k(:,:,6) = [-3 -3 -3; 5 0 -3; 5 5 -3];
 k(:,:,7) = [-3 -3 -3; -3 0 -3; 5 5 5];
 k(:,:,8) = [-3 -3 -3; -3 0 5; -3 5 5];
 
-% Convolucionamos cada m·scara con la imagen utilizando un for
+% Convolucionamos cada m√°scara con la imagen utilizando un for
 
 I_k = zeros(size(I,1), size(I,2), 8);
 for i = 1:8
-I_k(:,:,i) = imfilter(I,k(:,:,i));
+ I_k(:,:,i) = imfilter(I,k(:,:,i));
 end;
 
-% Y mostramos las im·genes resultantes
+% Y mostramos las im√°genes resultantes
 figure
 for j = 1:8
-subplot(2,4,j), imshow(abs(I_k(:,:,j)),[]), ...
-title(['M·scara de Kirsch ', num2str(j)]);
+ subplot(2,4,j), imshow(abs(I_k(:,:,j)),[]), ...
+ title(['M√°scara de Kirsch ', num2str(j)]);
 end
 
 
-%% Ahora vemos los valores m·ximos
+%% Ahora vemos los valores m√°ximos
 
 I_kir = max(I_k,[],3);
 
-% Y umbralizamos la imagen (con una transformaciÛn lineal que transforma la imagena una en niveles de grises y hace la transformaciÛn)
+% Y umbralizamos la imagen (con una transformaci√≥n lineal que transforma la imagena una en niveles de grises y hace la transformaci√≥n)
 minimo= min(I_kir(:)); 
 m = 255 / (max(I_kir(:)) - minimo);
 I_kir_adj = uint8(m * (I_kir-minimo));
 
 figure
-subplot(1,2,1), imshow(I_kir,[]), title('Con los valores m·ximos');
+subplot(1,2,1), imshow(I_kir,[]), title('Con los valores m√°ximos');
 subplot(1,2,2), imshow(I_kir_adj), title('Umbralizada');
 
 
-%% Generamos las m·scaras de Robinson
+%% Generamos las m√°scaras de Robinson
 
 r = zeros(3,3,8);
 r(:,:,1) = [-1 0 1; -2 0 2; -1 0 1];
@@ -176,7 +176,7 @@ r(:,:,7) = [-1 -2 -1; 0 0 0; 1 2 1];
 r(:,:,8) = [-2 -1 0; -1 0 1; 0 1 2];
 
 
-%Y filtramos la imagen con las ocho m·scaras de Robinson:
+%Y filtramos la imagen con las ocho m√°scaras de Robinson:
 
 I_r = zeros(size(I,1), size(I,2), 8);
 for i = 1:8
@@ -185,17 +185,17 @@ end
 figure
 for j = 1:8
 subplot(2,4,j), imshow(abs(I_r(:,:,j)),[]), ...
-title(['M·scara de Robinson ', num2str(j)]);
+title(['M√°scara de Robinson ', num2str(j)]);
 end
 
 
-%% El m·ximo de las ocho im·genes:
+%% El m√°ximo de las ocho im√°genes:
 I_rob = max(I_r,[],3);
 figure, imshow(I_kir,[]);
 
 
 %
-%% Ejemplo de detecciÛn de esquinas
+%% Ejemplo de detecci√≥n de esquinas
 %
 
 close all; clear all;
@@ -206,30 +206,31 @@ I=zeros(256);
 I(80:170,80:170)=1;
 imshow(I), title('Imagen original')
 
-%% Ahora calculamos sus fronteras y las im·genes de derivadas horizontales y verticales:
+%% Ahora calculamos sus fronteras y las im√°genes de derivadas horizontales y verticales:
  
 [I_sob4,t,I_sobv,I_sobh] = edge(I,'sobel');
 figure
 subplot(2,2,1), imshow(I), title('Imagen original')
-subplot(2,2,2), imshow(I_sob4), title('Sobel, Umbral autom·tico')
+subplot(2,2,2), imshow(I_sob4), title('Sobel, Umbral autom√°tico')
 subplot(2,2,3), imshow(abs(I_sobv),[]), title('Sobel, derivadas verticales')
 subplot(2,2,4), imshow(abs(I_sobh),[]), title('Sobel, derivadas horizontales')
 
 
-%%  Empecemos a calcular la matriz de Harris para detectar esquinas en cada pÌxel. 
-% Calculamos para cada pÌxel el mÌnimo valor de la matriz de Harris para detectar esquinas
+%%  Empecemos a calcular la matriz de Harris para detectar esquinas en cada p√≠xel. 
+
+% Calculamos para cada p√≠xel el valor m√≠nimo:
  
 I_sobv2=I_sobv.*I_sobv;
 I_sobh2=I_sobh.*I_sobh;
 I_sobvh=I_sobv.*I_sobh;
 
-%Filtramos cada una de estas tres im·genes con un filtro de unos de tamaÒo 3x3
+%Filtramos cada una de estas tres im√°genes con un filtro de unos de tama√±o 3x3
 I_sobv2m=imfilter(I_sobv2,ones(3));
 I_sobh2m= imfilter(I_sobh2,ones(3));
 I_sobvhm= imfilter(I_sobvh,ones(3));
 
 
-% Y calculamos para cada pÌxel el mÌnimo valor de la matriz de Harris para detectar esquinas:
+% Y calculamos para cada p√≠xel el m√≠nimo valor de la matriz de Harris:
  
 I_esq=zeros(size(I)); 
 [M,N]=size(I); 
