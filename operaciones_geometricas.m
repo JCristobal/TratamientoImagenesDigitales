@@ -23,7 +23,7 @@ x1 = 179; x2 = 219; y1 = 80; y2 = 181;
 
 xmin = x1; ymin = y1; anchura = x2-x1; altura = y2-y1;
 
-imagenrecortada = imcrop(I, [xmin ymin anchura altura]);
+imagenrecortada = imcrop(imagen, [xmin ymin anchura altura]);
 imshow(imagenrecortada)
 
 
